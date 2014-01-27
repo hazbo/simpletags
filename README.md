@@ -1,4 +1,4 @@
-# Simpletags
+# SimpleTags
 
 ## Description
 
