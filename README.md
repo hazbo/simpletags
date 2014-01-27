@@ -38,7 +38,7 @@ array(
 You can also set the delimiters and triggers via the following functions:
 
 ```php
-$simpletags = new Simpletags();
+$simpletags = new SimpleTag();
 $simpletags->set_delimitiers('{', '}');
 $simpletags->set_trigger('foo:');
 ```
