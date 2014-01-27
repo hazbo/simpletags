@@ -110,12 +110,10 @@ class SimpleTag
 
         $open_tag_regex = $this->_l_delim.$this->_trigger.'.*?'.$this->_r_delim;
 
-        while (($start = strpos($orig_content, $this->_l_delim.$this->_trigger)) !== FALSE)
-        {
+        while (($start = strpos($orig_content, $this->_l_delim.$this->_trigger)) !== FALSE) {
             $content = $orig_content;
 
-            if ( ! preg_match('/'.$open_tag_regex.'/i', $content, $tag))
-            {
+            if ( ! preg_match('/'.$open_tag_regex.'/i', $content, $tag)) {
                 break;
             }
 
@@ -145,13 +143,10 @@ class SimpleTag
             $content = substr($content, $start + $tag_len);
 
             // If there is an end tag, get and set the content.
-            if (($end = strpos($content, $end_tag)) !== FALSE)
-            {
+            if (($end = strpos($content, $end_tag)) !== FALSE) {
                 $parsed['content'] = substr($content, 0, $end);
                 $parsed['full_tag'] .= $parsed['content'].$end_tag;
-            }
-            else
-            {
+            } else {
                 $parsed['content'] = '';
             }
             $parsed['marker'] = 'marker_'.$this->_tag_count.$this->_mark;
@@ -161,34 +156,25 @@ class SimpleTag
             $this->_tag_count++;
         }
 
-        if (empty($parsed_tags))
-        {
+        if (empty($parsed_tags)) {
             return array('content' => $orig_content, 'tags' => array());
         }
 
         // Lets replace all the data tags first
-        if ( ! empty($data))
-        {
+        if ( ! empty($data)) {
             // Clean up the array
             $data = $this->_force_array($data);
 
-            foreach ($parsed_tags as $key => $tag)
-            {
+            foreach ($parsed_tags as $key => $tag) {
                 // Parse the single tags
-                if (empty($tag['content']))
-                {
+                if (empty($tag['content'])) {
                     $return_data = $this->_parse_data_single($tag, $data);
-                }
-
-                // Parse the double tags
-                else
-                {
+                } else {
                     $return_data = $this->_parse_data_double($tag, $data);
                 }
 
                 // If the tag referenced data then put that data in the content
-                if ($return_data)
-                {
+                if ($return_data) {
                     $orig_content = str_replace($tag['marker'], $return_data, $orig_content);
                     unset($parsed_tags[$key]);
                 }
@@ -196,23 +182,15 @@ class SimpleTag
         }
 
         // If there is a callback, call it for each tag
-        if ( ! empty($callback) AND is_callable($callback))
-        {
-            foreach ($parsed_tags as $tag)
-            {
+        if ( ! empty($callback) AND is_callable($callback)) {
+            foreach ($parsed_tags as $tag) {
                 $orig_content = str_replace($tag['marker'], call_user_func($callback, $tag), $orig_content);
             }
-        }
-
-        // If there is no callback then lets loop through any remaining tags and just set them as ''
-        else
-        {
-            foreach ($parsed_tags as $tag)
-            {
+        } else {
+            foreach ($parsed_tags as $tag) {
                 $orig_content = str_replace($tag['marker'], '', $orig_content);
             }
         }
-
         return array('content' => $orig_content, 'tags' => $parsed_tags);
     }
 
@@ -238,10 +216,8 @@ class SimpleTag
      */
     private function _parse_data_single($tag, $data)
     {
-        foreach ($tag['segments'] as $segment)
-        {
-            if ( ! isset($data[$segment]))
-            {
+        foreach ($tag['segments'] as $segment) {
+            if ( ! isset($data[$segment])) {
                 return FALSE;
             }
             $data = $data[$segment];
@@ -282,18 +258,15 @@ class SimpleTag
     private function _parse_data_double($tag, $data)
     {
         $return_data = '';
-        foreach ($tag['segments'] as $segment)
-        {
-            if ( ! isset($data[$segment]))
-            {
+        foreach ($tag['segments'] as $segment) {
+            if ( ! isset($data[$segment])) {
                 return FALSE;
             }
             $data = $data[$segment];
         }
 
         $temp = new SimpleTag();
-        foreach ($data as $val)
-        {
+        foreach ($data as $val) {
             $return = $temp->parse($tag['content'], $val);
             $return_data .= $return['content'];
         }
@@ -316,25 +289,20 @@ class SimpleTag
      */
     private function _force_array($var, $level = 1)
     {
-        if (is_object($var))
-        {
+        if (is_object($var)) {
             $var = (array) $var;
         }
 
-        if (is_array($var))
-        {
+        if (is_array($var)) {
             // Make sure everything else is array or single value
-            foreach ($var as $index => & $child)
-            {
+            foreach ($var as $index => & $child) {
                 $child = $this->_force_array($child, $level + 1);
 
-                if (is_object($child))
-                {
+                if (is_object($child)) {
                     $child = (array) $child;
                 }
             }
         }
-
         return $var;
     }
 
@@ -353,21 +321,15 @@ class SimpleTag
         preg_match_all('/(.*?)=([\'"])(.*?)\2/', $attributes, $parts);
 
         // The tag has no attrbutes
-        if (empty($parts[0]))
-        {
+        if (empty($parts[0])) {
             return array();
-        }
-
-        // The tag has attributes, so lets parse them
-        else
-        {
+        } else {
             $attr = array();
             for ($i = 0; $i < count($parts[1]); $i++)
             {
                 $attr[trim($parts[1][$i])] = $parts[3][$i];
             }
         }
-
         return $attr;
     }
 
@@ -387,5 +349,3 @@ class SimpleTag
         return $segments;
     }
 }
-
-/* End of file Simpletags.php */
