@@ -7,6 +7,7 @@
  * @package		Simpletags
  * @version		1.0
  * @author		Dan Horrigan <http://dhorrigan.com>
+ * @author      Harry Lawrence <http://hazbo.co.uk>
  * @license		Apache License v2.0
  * @copyright	2010 Dan Horrigan
  *
@@ -23,7 +24,9 @@
  * limitations under the License.
  */
 
-class Simpletags
+namespace Hazbo\Component;
+
+class SimpleTag
 {
 	private $_trigger = '';
 	private $_l_delim = '{';
@@ -290,7 +293,7 @@ class Simpletags
 			$data = $data[$segment];
 		}
 
-		$temp = new Simpletags();
+		$temp = new SimpleTag();
 		foreach ($data as $val)
 		{
 			$return = $temp->parse($tag['content'], $val);
