@@ -28,11 +28,12 @@ namespace Hazbo\Component;
 
 class SimpleTag
 {
-    private $_trigger = '';
-    private $_l_delim = '{';
-    private $_r_delim = '}';
-    private $_mark = 'k0dj3j4nJHDj22j';
-    private $_tag_count = 0;
+    private
+        $_trigger = '',
+        $_l_delim = '{',
+        $_r_delim = '}',
+        $_mark = 'k0dj3j4nJHDj22j',
+        $_tag_count = 0;
 
     // --------------------------------------------------------------------
 
