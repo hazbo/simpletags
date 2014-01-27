@@ -2,7 +2,7 @@
 
 ## Description
 
-Simpletags is exactly what it sounds like...a simple way to use tags in your PHP application.  This allows you to have tags that look like this:
+Simpletags is exactly what it sounds like... a simple way to use tags in your PHP application.  This allows you to have tags that look like this:
 
     {something:other}
     {date format="m/d/Y"}
@@ -12,6 +12,8 @@ Simpletags is exactly what it sounds like...a simple way to use tags in your PHP
     {/blog:entries}
 
 ## Installation
+
+Add `hazbo/simpletags` to your `composer.json` file
 
 ```json
 {
