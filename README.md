@@ -1,10 +1,6 @@
 # Simpletags
 
-Version 1.2
-
-* Author: [Dan Horrigan](http://dhorrigan.com/)
-
-## DESCRIPTION
+## Description
 
 Simpletags is exactly what it sounds like...a simple way to use tags in your PHP application.  This allows you to have tags that look like this:
 
@@ -15,30 +11,37 @@ Simpletags is exactly what it sounds like...a simple way to use tags in your PHP
     Stuff here
     {/blog:entries}
 
-## INSTALLATION
+## Installation
 
-1.  Just include the Simpletags.php file into your app
+```json
+{
+    "require" : {
+        "hazbo/simpletags"
+    }
+}
+```
 
-####  CodeIgniter
+`composer update`
 
-1.  Put Simpletags.php into your application/libraries folder
-2.  Load it like normal: @$this->load->library('simpletags');@ (or autoload it).
-
-## USAGE
+## Usage
 
 You can send a config array to the constructor with the following options (these are the defaults):
 
-    array(
-        'l_delim' => '{',
-        'r_delim' => '{',
-        'trigger' => '',
-    );
+```php
+array(
+    'l_delim' => '{',
+    'r_delim' => '{',
+    'trigger' => '',
+);
+```
 
 You can also set the delimiters and triggers via the following functions:
 
-    $simpletags = new Simpletags();
-    $simpletags->set_delimitiers('{', '}');
-    $simpletags->set_trigger('foo:');
+```php
+$simpletags = new Simpletags();
+$simpletags->set_delimitiers('{', '}');
+$simpletags->set_trigger('foo:');
+```
 
 To parse a string of text you simply call the parse() function.  The parse function accepts 3 parameters:
 
@@ -116,18 +119,20 @@ You can use tag pairs to loop through data as well:
 
 #### Data
 
-    $data = array(
-        'books' => array(
-            array(
-                'title' => 'PHP for Dummies',
-                'author' => 'John Doe'
-            ),
-            array(
-                'title' => 'CodeIgniter for Dummies',
-                'author' => 'Jane Doe'
-            )
+```php
+$data = array(
+    'books' => array(
+        array(
+            'title' => 'PHP for Dummies',
+            'author' => 'John Doe'
+        ),
+        array(
+            'title' => 'CodeIgniter for Dummies',
+            'author' => 'Jane Doe'
         )
-    );
+    )
+);
+```
 
 #### Resulting Output
 
@@ -168,10 +173,3 @@ Would send the callback function the following array:
 
         [marker] => marker_0k0dj3j4nJHDj22j
     )
-
-##  CodeIgniter Usage
-
-You use it the same as above, except you would use the following:
-
-    $this->load->library('simpletags');
-    $content = $this->simpletags->parse($content, $data, array($this, 'parser_callback'));
