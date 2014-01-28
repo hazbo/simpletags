@@ -65,7 +65,7 @@ class SimpleTag
      * @param   string  The right delimeter
      * @return  object  Returns $this to enable method chaining
      */
-    public function set_delimiters($left, $right)
+    public function setDelimiters($left, $right)
     {
         $this->_l_delim = $left;
         $this->_r_delim = $right;
@@ -86,7 +86,7 @@ class SimpleTag
      * @param   string  The tag trigger
      * @return  object  Returns $this to enable method chaining
      */
-    public function set_trigger($trigger)
+    public function setTrigger($trigger)
     {
         $this->_trigger = $trigger;
         return $this;
