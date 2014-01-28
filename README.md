@@ -41,8 +41,8 @@ You can also set the delimiters and triggers via the following functions:
 
 ```php
 $simpletags = new SimpleTag();
-$simpletags->set_delimitiers('{', '}');
-$simpletags->set_trigger('foo:');
+$simpletags->setDelimitiers('{', '}');
+$simpletags->setTrigger('foo:');
 ```
 
 To parse a string of text you simply call the parse() function.  The parse function accepts 3 parameters:
